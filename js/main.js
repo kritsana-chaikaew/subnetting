@@ -31,7 +31,7 @@ function showStats() {
   data[13] = binId()
   data[14] = parseInt(parseInt(data[13], 2),10)
   data[15] = "0x" + data[14].toString(16)
-  data[16] = invertAddress()
+  data[16] = reverseAddress()
   getAllGroups()
 
   for (var i=0; i<headers.length; i++) {
@@ -218,7 +218,7 @@ function ipType() {
   return "Public"
 }
 
-function invertAddress () {
+function reverseAddress () {
   var ips = ip.split('.')
   return ips[3] + '.' + ips[2] + '.' + ips[1] + '.' +  ips[0] + ".in-addr.arpa"
 }
