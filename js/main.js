@@ -1,5 +1,5 @@
 var subnet
-var ip
+var ip = document.getElementById("ip")
 
 function calculate () {
   subnet = document.getElementById("subnet").value
