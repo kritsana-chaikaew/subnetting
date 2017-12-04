@@ -5,11 +5,11 @@ function calculate () {
   subnet = document.getElementById("subnet").value
   ip = document.getElementById("ip").value
 
-  showStats()
-  showSubnets()
+  showSummary()
+  showPossibleHostss()
 }
 
-function showStats() {
+function showSummary() {
   var tableBody = document.getElementById("stat-table-body")
   tableBody.innerHTML = ""
 
@@ -48,7 +48,7 @@ function showStats() {
   }
 }
 
-function showSubnets() {
+function showPossibleHostss() {
   var tableHead = document.getElementById("table-head")
   tableHead.innerHTML = ""
   var tableBody = document.getElementById("table-body")
