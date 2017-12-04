@@ -103,13 +103,13 @@ function splitBit (ipString) {
   return blocks
 }
 
-function mergeIp (ipArray) {
+function dottedIp (ipArray) {
   return ipArray[0] + '.' + ipArray[1] + '.' + ipArray[2] + '.' + ipArray[3]
 }
 
 function subnetMask() {
   sub = binSubnetMask().split('.')
-  return mergeIp([bitToDec(sub[0]), bitToDec(sub[1]), bitToDec(sub[2]), bitToDec(sub[3])])
+  return dottedIp([bitToDec(sub[0]), bitToDec(sub[1]), bitToDec(sub[2]), bitToDec(sub[3])])
 }
 
 function WildcardMask () {
@@ -122,7 +122,7 @@ function WildcardMask () {
     }
   }
   sub = bitString.split('.')
-  return mergeIp([bitToDec(sub[0]), bitToDec(sub[1]), bitToDec(sub[2]), bitToDec(sub[3])])
+  return dottedIp([bitToDec(sub[0]), bitToDec(sub[1]), bitToDec(sub[2]), bitToDec(sub[3])])
 }
 
 function binSubnetMask () {
@@ -131,7 +131,7 @@ function binSubnetMask () {
   for(var i=subnet; i<32; i++){
     sub = replaceStringAt(sub, '0', i)
   }
-  return mergeIp(splitBit(sub))
+  return dottedIp(splitBit(sub))
 }
 
 function networkAddress(){
@@ -145,7 +145,7 @@ function networkAddress(){
     bitString = replaceStringAt(bitString, '0', i)
   }
   bitString = splitBit(bitString)
-  return mergeIp([bitToDec(bitString[0]), bitToDec(bitString[1]), bitToDec(bitString[2]), bitToDec(bitString[3])])
+  return dottedIp([bitToDec(bitString[0]), bitToDec(bitString[1]), bitToDec(bitString[2]), bitToDec(bitString[3])])
 }
 
 function broadcastAddress(ip){
@@ -159,7 +159,7 @@ function broadcastAddress(ip){
     bitString = replaceStringAt(bitString, '1', i)
   }
   bitString = splitBit(bitString)
-  return mergeIp([bitToDec(bitString[0]), bitToDec(bitString[1]), bitToDec(bitString[2]), bitToDec(bitString[3])])
+  return dottedIp([bitToDec(bitString[0]), bitToDec(bitString[1]), bitToDec(bitString[2]), bitToDec(bitString[3])])
 }
 
 function ipRange (ipNetwork, ipBroadcast) {
@@ -173,8 +173,8 @@ function ipRange (ipNetwork, ipBroadcast) {
   ipNetworks[3] = parseInt(ipNetworks[3]) + 1;
   ipBroadcasts[3] -= 1;
 
-  ipNetwork = mergeIp(ipNetworks)
-  ipBroadcast = mergeIp(ipBroadcasts)
+  ipNetwork = dottedIp(ipNetworks)
+  ipBroadcast = dottedIp(ipBroadcasts)
 
   return ipNetwork + " - " + ipBroadcast
 }
@@ -230,7 +230,7 @@ function getAllGroups () {
   for(var i = classNum; i < 4; i++) {
     startIps[i] = "0"
   }
-  startIps = mergeIp(startIps)
+  startIps = dottedIp(startIps)
 
   var range = Math.pow(2, ((classNum + 1) * 8) - subnet)
   var network = startIps
@@ -247,7 +247,7 @@ function getAllGroups () {
 
     network = network.split('.')
     network[classNum] = parseInt(network[classNum]) + range
-    network = mergeIp(network)
+    network = dottedIp(network)
   } while (parseInt(broadcast.split('.')[classNum]) < 255)
   return result
 }
